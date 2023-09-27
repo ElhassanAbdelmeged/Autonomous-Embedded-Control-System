@@ -1,0 +1,20 @@
+#include "servo.h"
+
+#include <avr/io.h>
+
+
+
+
+
+// Function to initialize PWM and servo settings
+void Servo_Init() {
+}
+
+// Function to set the angle of the servo motor
+void Servo_SetAngle(uint8_t angle) {
+
+
+
+
+}
+

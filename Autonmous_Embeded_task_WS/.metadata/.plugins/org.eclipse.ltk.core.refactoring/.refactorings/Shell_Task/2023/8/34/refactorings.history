@@ -1,0 +1,3 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">&#x0A;<refactoring comment="Rename resource &apos;Shell_Task/HAL/stepper.c&apos; to &apos;servo.c&apos;" description="Rename resource &apos;stepper.c&apos;" flags="7" id="org.eclipse.ltk.core.refactoring.rename.resource" input="HAL/stepper.c" name="servo.c" stamp="1693045440268" updateReferences="true"/>&#x0A;<refactoring comment="Rename resource &apos;Shell_Task/HAL/stepper.h&apos; to &apos;servo.h&apos;" description="Rename resource &apos;stepper.h&apos;" flags="7" id="org.eclipse.ltk.core.refactoring.rename.resource" input="HAL/stepper.h" name="servo.h" stamp="1693045447967" updateReferences="true"/>
+</session>

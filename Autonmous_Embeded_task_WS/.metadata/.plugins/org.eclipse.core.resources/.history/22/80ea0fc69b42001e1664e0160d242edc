@@ -1,0 +1,53 @@
+#include "stepper.h"
+#include <util/delay.h>
+
+// Define pins for ULN2003 connections
+#define MOTOR_PORT  PORTD
+#define MOTOR_DDR   DDRD
+
+#define PIN_1 PD3
+#define PIN_2 PD4
+#define PIN_3 PD5
+#define PIN_4 PD6
+
+// Array to hold the sequence of control signals for each step
+const uint8_t step_sequence[8] = {0b0001, 0b0011, 0b0010, 0b0110, 0b0100, 0b1100, 0b1000, 0b1001};
+
+void stepper_init(void) {
+    MOTOR_DDR |= (1 << PIN_1) | (1 << PIN_2) | (1 << PIN_3) | (1 << PIN_4);
+    MOTOR_PORT &= ~((1 << PIN_1) | (1 << PIN_2) | (1 << PIN_3) | (1 << PIN_4));
+}
+
+void rotate_motor(Direction direction, uint16_t angle) {
+    uint16_t steps = angle;
+    uint8_t step_idx = 0;
+
+    // Determine the number of steps needed
+    if (angle > 360) {
+        steps = angle % 360;
+    }
+
+    // Calculate the number of steps to move
+    uint16_t steps_to_move = (steps * 64) / 360; // Assuming 64 steps per revolution
+
+    for (uint16_t i = 0; i < steps_to_move; i++) {
+        if (direction == CW) {
+            step_idx++;
+            if (step_idx > 7) {
+                step_idx = 0;
+            }
+        } else {
+            if (step_idx == 0) {
+                step_idx = 7;
+            } else {
+                step_idx--;
+            }
+        }
+
+        MOTOR_PORT = (MOTOR_PORT & 0xF0) | (step_sequence[step_idx] & 0x0F);
+        _delay_ms(10); // Adjust delay as needed
+    }
+
+    // Turn off all motor coils
+    MOTOR_PORT &= 0xF0;
+}

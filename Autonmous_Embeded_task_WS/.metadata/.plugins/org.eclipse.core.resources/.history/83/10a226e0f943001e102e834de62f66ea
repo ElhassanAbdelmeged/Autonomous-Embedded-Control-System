@@ -1,0 +1,100 @@
+#include "stepper.h"
+#include <util/delay.h>
+
+#define MOTOR_PORT  PORTD
+#define MOTOR_DDR   DDRD
+
+#define PIN_1 PD4
+#define PIN_2 PD5
+#define PIN_3 PD6
+#define PIN_4 PD7
+
+
+
+void stepper_init(void) {
+    MOTOR_DDR |= (1 << PIN_1) | (1 << PIN_2) | (1 << PIN_3) | (1 << PIN_4);
+    MOTOR_PORT &= ~((1 << PIN_1) | (1 << PIN_2) | (1 << PIN_3) | (1 << PIN_4));
+}
+
+void rotate_motor(Direction direction, uint16_t angle) {
+
+	int period=100;
+	int steps_CW=  angle/3.75;
+	int steps_CCW= angle/7.5;
+
+if(direction==S_CW){
+    for(int i=0;i<steps_CW;i++)		/* Rotate Stepper Motor clockwise with Half step sequence; Half step angle 3.75 */
+    		{
+    			PORTD = 0x09;  //0000 0000
+    			_delay_ms(period);
+    			PORTD = 0x08;
+    			_delay_ms(period);
+    			PORTD = 0x0C;
+    			_delay_ms(period);
+    			PORTD = 0x04;
+    			_delay_ms(period);
+    			PORTD = 0x06;
+    			_delay_ms(period);
+    			PORTD = 0x02;
+    			_delay_ms(period);
+    			PORTD = 0x03;
+    			_delay_ms(period);
+    			PORTD = 0x01;
+    			_delay_ms(period);
+    		}
+
+}
+
+
+
+else if(direction==S_CCW){
+
+    for(int i=0;i<steps_CCW;i++)		/* Rotate Stepper Motor Anticlockwise with Full step sequence; Full step angle 7.5 */
+    		{
+    			PORTD &= ~(0xF0) |(0x90);		//00001001
+    			_delay_ms(period);
+    			PORTD &= ~(0xF0) | 0x30;		//0000 0011
+    			_delay_ms(period);
+    			PORTD &= ~(0xF0) | 0x60;		//0000 0101
+    			_delay_ms(period);
+    			PORTD &= ~(0xF0) |0xC0;		//0000 1100
+    			_delay_ms(period);
+    		}
+    			PORTD &= ~(0xF0) |0x90;
+    			_delay_ms(period);
+    			_delay_ms(1000);
+    	}
+
+
+}
+
+
+
+
+
+
+
+
+
+
+
+//		LCD_displayString(UART_Data);
+//		UART_sendString("\r\n");
+//		UART_sendByte(UART_Data[0]);
+//		UART_sendString("\r\n");
+//		UART_sendByte(UART_Data[1]);
+//		UART_sendString("\r\n");
+//		UART_sendByte(UART_Data[2]);
+//		UART_sendString("\r\n");
+//		UART_sendByte(UART_Data[3]);
+//		UART_sendString("\r\n");
+//		UART_sendByte(UART_Data[4]);
+//		UART_sendString("\r\n");
+//		UART_sendByte(UART_Data[5]);
+//		UART_sendString("\r\n");
+//		UART_sendByte(UART_Data[6]);
+//		UART_sendString("\r\n");
+//		UART_sendByte(UART_Data[7]);
+//		UART_sendString("\r\n");
+//		UART_sendByte(UART_Data[8]);
+//		UART_sendString("\r\n");

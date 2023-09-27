@@ -1,0 +1,25 @@
+#ifndef APP_H_
+#define APP_H_
+
+
+#include "avr/io.h"
+
+#include "../MCAL/uart.h "
+#include "../MCAL/timer.h "
+#include "../MCAL/gpio.h "
+
+
+#include "../HAL/motor.h "
+#include "../HAL/lcd.h "
+#include "../HAL/stepper.h "
+
+#include "../LIB/std_types.h"
+
+
+
+
+
+
+int stringSubstringToInteger( char *str, int start, int end);
+
+#endif /* APP_H_ */

@@ -1,0 +1,104 @@
+13:55:53 **** Build of configuration Debug for project Shell_Task ****
+make all 
+Building file: ../MCAL/PWM.c
+Invoking: AVR Compiler
+avr-gcc -Wall -g2 -gstabs -O0 -fpack-struct -fshort-enums -ffunction-sections -fdata-sections -std=gnu99 -funsigned-char -funsigned-bitfields -mmcu=atmega32 -DF_CPU=16000000UL -MMD -MP -MF"MCAL/PWM.d" -MT"MCAL/PWM.o" -c -o "MCAL/PWM.o" "../MCAL/PWM.c"
+Finished building: ../MCAL/PWM.c
+ 
+Building file: ../MCAL/gpio.c
+Invoking: AVR Compiler
+avr-gcc -Wall -g2 -gstabs -O0 -fpack-struct -fshort-enums -ffunction-sections -fdata-sections -std=gnu99 -funsigned-char -funsigned-bitfields -mmcu=atmega32 -DF_CPU=16000000UL -MMD -MP -MF"MCAL/gpio.d" -MT"MCAL/gpio.o" -c -o "MCAL/gpio.o" "../MCAL/gpio.c"
+Finished building: ../MCAL/gpio.c
+ 
+Building file: ../MCAL/timer.c
+Invoking: AVR Compiler
+avr-gcc -Wall -g2 -gstabs -O0 -fpack-struct -fshort-enums -ffunction-sections -fdata-sections -std=gnu99 -funsigned-char -funsigned-bitfields -mmcu=atmega32 -DF_CPU=16000000UL -MMD -MP -MF"MCAL/timer.d" -MT"MCAL/timer.o" -c -o "MCAL/timer.o" "../MCAL/timer.c"
+../MCAL/timer.c: In function 'Timer1_setCallBack':
+../MCAL/timer.c:77: warning: function return types not compatible due to 'volatile'
+Finished building: ../MCAL/timer.c
+ 
+Building file: ../MCAL/uart.c
+Invoking: AVR Compiler
+avr-gcc -Wall -g2 -gstabs -O0 -fpack-struct -fshort-enums -ffunction-sections -fdata-sections -std=gnu99 -funsigned-char -funsigned-bitfields -mmcu=atmega32 -DF_CPU=16000000UL -MMD -MP -MF"MCAL/uart.d" -MT"MCAL/uart.o" -c -o "MCAL/uart.o" "../MCAL/uart.c"
+Finished building: ../MCAL/uart.c
+ 
+Building file: ../HAL/lcd.c
+Invoking: AVR Compiler
+avr-gcc -Wall -g2 -gstabs -O0 -fpack-struct -fshort-enums -ffunction-sections -fdata-sections -std=gnu99 -funsigned-char -funsigned-bitfields -mmcu=atmega32 -DF_CPU=16000000UL -MMD -MP -MF"HAL/lcd.d" -MT"HAL/lcd.o" -c -o "HAL/lcd.o" "../HAL/lcd.c"
+In file included from ../HAL/lcd.c:13:
+c:/winavr-20100110/lib/gcc/../../avr/include/util/delay.h:90:3: warning: #warning "Compiler optimizations disabled; functions from <util/delay.h> won't work as designed"
+../HAL/lcd.c: In function 'LCD_intgerToString':
+../HAL/lcd.c:209: warning: implicit declaration of function 'itoa'
+Finished building: ../HAL/lcd.c
+ 
+Building file: ../HAL/motor.c
+Invoking: AVR Compiler
+avr-gcc -Wall -g2 -gstabs -O0 -fpack-struct -fshort-enums -ffunction-sections -fdata-sections -std=gnu99 -funsigned-char -funsigned-bitfields -mmcu=atmega32 -DF_CPU=16000000UL -MMD -MP -MF"HAL/motor.d" -MT"HAL/motor.o" -c -o "HAL/motor.o" "../HAL/motor.c"
+Finished building: ../HAL/motor.c
+ 
+Building file: ../HAL/servo.c
+Invoking: AVR Compiler
+avr-gcc -Wall -g2 -gstabs -O0 -fpack-struct -fshort-enums -ffunction-sections -fdata-sections -std=gnu99 -funsigned-char -funsigned-bitfields -mmcu=atmega32 -DF_CPU=16000000UL -MMD -MP -MF"HAL/servo.d" -MT"HAL/servo.o" -c -o "HAL/servo.o" "../HAL/servo.c"
+../HAL/servo.c: In function 'Servo_SetAngle':
+../HAL/servo.c:18: warning: implicit declaration of function 'PWM_Timer2_Start'
+Finished building: ../HAL/servo.c
+ 
+Building file: ../APP/APP.c
+Invoking: AVR Compiler
+avr-gcc -Wall -g2 -gstabs -O0 -fpack-struct -fshort-enums -ffunction-sections -fdata-sections -std=gnu99 -funsigned-char -funsigned-bitfields -mmcu=atmega32 -DF_CPU=16000000UL -MMD -MP -MF"APP/APP.d" -MT"APP/APP.o" -c -o "APP/APP.o" "../APP/APP.c"
+../APP/APP.c: In function 'stringSubstringToInteger':
+../APP/APP.c:19: warning: implicit declaration of function 'atoi'
+Finished building: ../APP/APP.c
+ 
+Building file: ../APP/main.c
+Invoking: AVR Compiler
+avr-gcc -Wall -g2 -gstabs -O0 -fpack-struct -fshort-enums -ffunction-sections -fdata-sections -std=gnu99 -funsigned-char -funsigned-bitfields -mmcu=atmega32 -DF_CPU=16000000UL -MMD -MP -MF"APP/main.d" -MT"APP/main.o" -c -o "APP/main.o" "../APP/main.c"
+In file included from ../APP/main.c:3:
+c:/winavr-20100110/lib/gcc/../../avr/include/util/delay.h:90:3: warning: #warning "Compiler optimizations disabled; functions from <util/delay.h> won't work as designed"
+../APP/main.c: In function 'main':
+../APP/main.c:41: warning: pointer targets in passing argument 1 of 'UART_sendString' differ in signedness
+../APP/main.c:42: warning: pointer targets in passing argument 1 of 'UART_sendString' differ in signedness
+../APP/main.c:45: warning: pointer targets in passing argument 1 of 'stringSubstringToInteger' differ in signedness
+../APP/main.c:46: warning: pointer targets in passing argument 1 of 'stringSubstringToInteger' differ in signedness
+../APP/main.c:62: warning: pointer targets in passing argument 1 of 'UART_sendString' differ in signedness
+../APP/main.c:63: warning: pointer targets in passing argument 1 of 'UART_sendString' differ in signedness
+../APP/main.c:64: warning: pointer targets in passing argument 1 of 'UART_sendString' differ in signedness
+../APP/main.c:77: warning: pointer targets in passing argument 1 of 'UART_sendString' differ in signedness
+../APP/main.c:78: warning: pointer targets in passing argument 1 of 'UART_sendString' differ in signedness
+../APP/main.c:79: warning: pointer targets in passing argument 1 of 'UART_sendString' differ in signedness
+../APP/main.c:89: warning: pointer targets in passing argument 1 of 'UART_sendString' differ in signedness
+../APP/main.c:90: warning: pointer targets in passing argument 1 of 'UART_sendString' differ in signedness
+../APP/main.c:91: warning: pointer targets in passing argument 1 of 'UART_sendString' differ in signedness
+../APP/main.c:103: warning: pointer targets in passing argument 1 of 'UART_sendString' differ in signedness
+../APP/main.c:104: warning: pointer targets in passing argument 1 of 'UART_sendString' differ in signedness
+../APP/main.c:105: warning: pointer targets in passing argument 1 of 'UART_sendString' differ in signedness
+../APP/main.c:170: warning: pointer targets in passing argument 1 of 'UART_sendString' differ in signedness
+Finished building: ../APP/main.c
+ 
+Building target: Shell_Task.elf
+Invoking: AVR C Linker
+avr-gcc -Wl,-Map,Shell_Task.map -mmcu=atmega32 -o "Shell_Task.elf"  ./MCAL/PWM.o ./MCAL/gpio.o ./MCAL/timer.o ./MCAL/uart.o  ./HAL/lcd.o ./HAL/motor.o ./HAL/servo.o  ./APP/APP.o ./APP/main.o   
+Finished building target: Shell_Task.elf
+ 
+Invoking: AVR Create Extended Listing
+avr-objdump -h -S Shell_Task.elf  >"Shell_Task.lss"
+Finished building: Shell_Task.lss
+ 
+Invoking: Print Size
+avr-size --format=avr --mcu=atmega32 Shell_Task.elf
+AVR Memory Usage
+----------------
+Device: atmega32
+
+Program:   11978 bytes (36.6% Full)
+(.text + .data + .bootloader)
+
+Data:        537 bytes (26.2% Full)
+(.data + .bss + .noinit)
+
+
+Finished building: sizedummy
+ 
+
+13:55:57 Build Finished. 0 errors, 23 warnings. (took 3s.495ms)
+

@@ -1,0 +1,9 @@
+#include "avr/io.h"
+
+#include "../MCAL/uart.h "
+#include "../MCAL/timer.h "
+#include "../MCAL/gpio.h "
+
+#include "../HAL/motor.h "
+#include "../HAL/lcd.h "
+#include "../HAL/motor.h "

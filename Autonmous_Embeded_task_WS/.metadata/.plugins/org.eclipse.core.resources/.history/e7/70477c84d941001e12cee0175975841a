@@ -1,0 +1,40 @@
+#include "APP.h "
+
+#include "avr/io.h"
+
+#include "../MCAL/uart.h "
+#include "../MCAL/timer.h "
+#include "../MCAL/gpio.h "
+
+#include "../HAL/motor.h "
+#include "../HAL/lcd.h "
+#include "../HAL/stepper.h "
+
+
+
+
+
+void OperatingSystem(void){
+	uint8 UART_Flag=0;
+	uint8 UART_DataString[9];
+
+do{
+
+	UART_sendString("Welcom... please put the data");
+	UART_receiveString(UART_Data);
+
+	if(UART_Data[7]=='E')
+	{
+		UART_Data=1;
+
+	}
+
+
+
+}while(DataFlag!=1);
+
+
+
+
+
+}

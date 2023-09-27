@@ -1,0 +1,10 @@
+#ifndef STEPPER_MOTOR_H
+#define STEPPER_MOTOR_H
+
+// Initialize the stepper motor interface
+void stepper_init();
+
+// Rotate the stepper motor by a specified angle and direction
+void rotate_stepper(int angle, int direction);
+
+#endif

@@ -1,0 +1,37 @@
+#include "servo.h"
+
+#include <avr/io.h>
+
+// Assuming F_CPU is your microcontroller's clock frequency
+#ifndef F_CPU
+#define F_CPU 16000000UL
+#endif
+
+// Function to initialize PWM and servo settings
+void Servo_Init() {
+    // Set OC2/PD7 pin as output
+    DDRD |= (1 << PD7);
+
+    // Set Fast PWM mode with non-inverted output
+    TCCR2 = (1 << WGM20) | (1 << WGM21) | (1 << COM21) | (1 << CS20);
+
+    // Set initial angle to 90 degrees (center position)
+    Servo_SetAngle(90);
+}
+
+// Function to set the angle of the servo motor
+void Servo_SetAngle(uint8_t angle) {
+    // Map the angle to the appropriate duty cycle range (adjust these values if needed)
+    uint16_t duty_cycle = ((uint32_t)angle * 19) / 9 + 50;
+
+    // Ensure duty cycle is within valid limits (adjust if needed)
+    if (duty_cycle < 50) {
+        duty_cycle = 50;
+    } else if (duty_cycle > 250) {
+        duty_cycle = 250;
+    }
+
+    // Set the duty cycle
+    OCR2 = (uint8_t)duty_cycle;
+}
+

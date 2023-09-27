@@ -1,0 +1,43 @@
+#include "stepper_motor.h"
+#include <util/delay.h>
+
+#define MOTOR_PORT  PORTD
+#define MOTOR_DDR   DDRD
+
+#define PIN_1 PD3
+#define PIN_2 PD4
+#define PIN_3 PD5
+#define PIN_4 PD6
+
+const uint8_t step_sequence[4] = {0b0001, 0b0010, 0b0100, 0b1000}; // Change the sequence
+
+void stepper_init(void) {
+    MOTOR_DDR |= (1 << PIN_1) | (1 << PIN_2) | (1 << PIN_3) | (1 << PIN_4);
+    MOTOR_PORT &= ~((1 << PIN_1) | (1 << PIN_2) | (1 << PIN_3) | (1 << PIN_4));
+}
+
+void rotate_motor(Direction direction, uint16_t angle) {
+    uint16_t steps = angle;
+
+    // Calculate the number of steps to move
+    uint16_t steps_to_move = steps;
+
+    // Calculate the number of steps in the sequence
+    uint8_t sequence_steps = sizeof(step_sequence) / sizeof(step_sequence[0]);
+
+    for (uint16_t i = 0; i < steps_to_move; i++) {
+        uint8_t step_idx;
+
+        if (direction == CW) {
+            step_idx = (i % sequence_steps);
+        } else {
+            step_idx = (sequence_steps - 1) - (i % sequence_steps);
+        }
+
+        MOTOR_PORT = (MOTOR_PORT & 0xF0) | (step_sequence[step_idx] & 0x0F);
+        _delay_ms(5); // Adjust delay to suit your motor's speed and torque
+    }
+
+    // Turn off all motor coils
+    MOTOR_PORT &= 0xF0;
+}

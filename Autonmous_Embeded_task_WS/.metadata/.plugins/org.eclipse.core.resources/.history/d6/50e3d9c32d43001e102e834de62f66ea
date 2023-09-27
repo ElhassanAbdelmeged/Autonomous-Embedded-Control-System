@@ -1,0 +1,102 @@
+#include"APP.h"
+
+
+int main (void)
+{
+
+	UART_ConfigType UART_Configuration={_8_bit,no_parity,_1_bit,9600};
+	Timer1_ConfigType Timer1_Configuration={0,15625,F_CPU_1024,CTC_MODE}; //15625 for making an interrupt each second
+
+	UART_init(&UART_Configuration);
+	Timer1_init(&Timer1_Configuration);
+	DcMotor_Init();
+	LCD_init();
+	stepper_init();
+
+	uint8 DataFlag=0;
+	uint8 UART_Data[9];
+	int Velocity=0;
+	int Angle=0;
+
+
+
+while(1){
+
+	rotate_motor(S_CW,20);
+
+	do{
+
+		UART_sendString("please put the data: ");
+		UART_sendString("\r\n");
+		UART_receiveString(UART_Data);
+
+		Velocity	= stringSubstringToInteger(UART_Data,0,2);
+		Angle		= stringSubstringToInteger(UART_Data,4,5);
+
+
+//		LCD_displayString(UART_Data);
+//		UART_sendString("\r\n");
+//		UART_sendByte(UART_Data[0]);
+//		UART_sendString("\r\n");
+//		UART_sendByte(UART_Data[1]);
+//		UART_sendString("\r\n");
+//		UART_sendByte(UART_Data[2]);
+//		UART_sendString("\r\n");
+//		UART_sendByte(UART_Data[3]);
+//		UART_sendString("\r\n");
+//		UART_sendByte(UART_Data[4]);
+//		UART_sendString("\r\n");
+//		UART_sendByte(UART_Data[5]);
+//		UART_sendString("\r\n");
+//		UART_sendByte(UART_Data[6]);
+//		UART_sendString("\r\n");
+//		UART_sendByte(UART_Data[7]);
+//		UART_sendString("\r\n");
+//		UART_sendByte(UART_Data[8]);
+//		UART_sendString("\r\n");
+		if(UART_Data[7]=='E')
+		{
+			if((Angle<=45)&&(Velocity<=100)){
+
+				if((UART_Data[3]=='F')||UART_Data[3]=='B'){
+					if((UART_Data[6]=='R')||UART_Data[6]=='L'){
+							DataFlag=1;
+					}
+				}
+			}
+		}
+		else{
+			UART_sendString("\r\n");
+			UART_sendString("OoPs! Wrong Data. ");
+			UART_sendString("\r\n");
+
+		}
+
+	}while(DataFlag!=1);
+
+
+
+
+	LCD_moveCursor(1, 1);
+	LCD_intgerToString(Velocity);
+	LCD_moveCursor(3, 1);
+	LCD_intgerToString(Angle);
+	LCD_displayStringRowColumn(2, 1, "KOSM LSISI");
+//if(UART_Data[3]=='F')
+	DcMotor_Rotate(CW, Velocity);
+//else if(UART_Data[3]=='B')
+	//DcMotor_Rotate(ANTI_CW, Velocity);
+	UART_sendString("\r\n");
+}
+
+
+
+
+
+
+
+
+
+
+
+}

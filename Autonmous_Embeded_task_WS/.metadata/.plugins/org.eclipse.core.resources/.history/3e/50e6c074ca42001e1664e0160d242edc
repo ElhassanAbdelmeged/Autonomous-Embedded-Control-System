@@ -1,0 +1,38 @@
+#include <avr/io.h>
+#include <util/delay.h>
+#include "stepper.h"
+
+// Define stepper motor control pins
+#define STEP_PIN    PD3
+#define DIR_PIN     PD4
+#define STEP_DELAY  2 // Adjust as needed
+
+// Number of steps per revolution (assuming 1 degree per step)
+#define STEPS_PER_REVOLUTION    360
+
+// Initialize the stepper motor interface
+void stepper_init() {
+    // Configure step and direction pins as output
+    DDRD |= (1 << STEP_PIN) | (1 << DIR_PIN)|(1 << PD5)|(1 << PD6) ;
+}
+
+// Rotate the stepper motor by a specified angle and direction
+void rotate_stepper(int angle, enum RotationDirection direction) {
+    // Calculate the number of steps needed for the desired angle
+    int steps = (angle % 360) * (STEPS_PER_REVOLUTION / 360);
+
+    // Set the direction pin
+    if (direction == CLOCKWISE) {
+        PORTD |= (1 << DIR_PIN);  // Set direction clockwise
+    } else {
+        PORTD &= ~(1 << DIR_PIN); // Set direction counterclockwise
+    }
+
+    // Pulse the step pin to move the motor
+    for (int i = 0; i < steps; i++) {
+        PORTD |= (1 << STEP_PIN);
+        _delay_ms(STEP_DELAY);
+        PORTD &= ~(1 << STEP_PIN);
+        _delay_ms(STEP_DELAY);
+    }
+}

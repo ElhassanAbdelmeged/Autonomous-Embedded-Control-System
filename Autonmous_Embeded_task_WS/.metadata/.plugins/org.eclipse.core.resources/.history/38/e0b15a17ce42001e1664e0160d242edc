@@ -1,0 +1,18 @@
+#ifndef STEPPER_MOTOR_H
+#define STEPPER_MOTOR_H
+
+#include <avr/io.h>
+
+// Define the directions
+typedef enum {
+    S_CW,
+    S_CCW
+} Direction;
+
+// Function to initialize the stepper motor
+void stepper_init(void);
+
+// Function to rotate the stepper motor by a specified angle and direction
+void rotate_motor(Direction direction, uint16_t angle);
+
+#endif // STEPPER_MOTOR_H
